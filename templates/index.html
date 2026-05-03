@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Star Classification Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-icon">✦</span>
+    <span class="logo-text">StarClassify</span>
+  </div>
+  <ul class="sidebar-menu">
+    <li class="menu-item active" data-page="overview">
+      <span class="menu-icon">🌌</span> Overview
+    </li>
+    <li class="menu-item" data-page="dataset">
+      <span class="menu-icon">📊</span> Dataset
+    </li>
+    <li class="menu-item" data-page="predict">
+      <span class="menu-icon">🔭</span> Prediksi Objek
+    </li>
+    <li class="menu-item" data-page="compare">
+      <span class="menu-icon">⚖️</span> Perbandingan Model
+    </li>
+    <li class="menu-item" data-page="performance">
+      <span class="menu-icon">📈</span> Performa & Validasi
+    </li>
+  </ul>
+  <div class="sidebar-footer">187241002</div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+  <!-- ══════════════ PAGE: OVERVIEW ══════════════ -->
+  <section class="page active" id="page-overview">
+    <div class="page-header">
+      <h1>🌌 Klasifikasi Objek Langit</h1>
+      <p class="subtitle">Stellar Classification menggunakan Sloan Digital Sky Survey (SDSS)</p>
+    </div>
+
+    <!-- Stats cards -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">🗂️</div>
+        <div class="stat-val" id="stat-total">—</div>
+        <div class="stat-label">Total Sampel</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔢</div>
+        <div class="stat-val" id="stat-features">—</div>
+        <div class="stat-label">Fitur Input</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏷️</div>
+        <div class="stat-val">3</div>
+        <div class="stat-label">Kelas Target</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🤖</div>
+        <div class="stat-val">3</div>
+        <div class="stat-label">Model ML</div>
+      </div>
+    </div>
+
+    <!-- Problem overview -->
+    <div class="card">
+      <h2>📌 Latar Belakang Masalah</h2>
+      <p>
+        Dalam astronomi modern, mengidentifikasi tipe objek langit secara manual dari jutaan
+        data pengamatan teleskop merupakan pekerjaan yang sangat memakan waktu. Proyek
+        <strong>Sloan Digital Sky Survey (SDSS)</strong> telah mengumpulkan data spektroskopi
+        dari ratusan ribu objek langit, mencakup tiga kategori utama:
+      </p>
+      <div class="class-cards">
+        <div class="class-card galaxy">
+          <div class="class-icon">🌀</div>
+          <h3>GALAXY</h3>
+          <p>Kumpulan miliaran bintang terikat oleh gravitasi, seperti Bima Sakti. Merupakan kelas mayoritas dalam dataset.</p>
+        </div>
+        <div class="class-card qso">
+          <div class="class-icon">⚡</div>
+          <h3>QSO</h3>
+          <p><em>Quasi-Stellar Object</em> — inti galaksi yang sangat terang, didukung oleh lubang hitam supermasif. Dikenal sebagai quasar.</p>
+        </div>
+        <div class="class-card star">
+          <div class="class-icon">⭐</div>
+          <h3>STAR</h3>
+          <p>Bola plasma yang memancarkan cahaya melalui reaksi fusi nuklir. Objek paling familiar di langit malam.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Tujuan & Pendekatan</h2>
+      <div class="two-col">
+        <div>
+          <h3>Tujuan</h3>
+          <ul class="styled-list">
+            <li>Membangun model klasifikasi otomatis untuk tiga tipe objek langit</li>
+            <li>Membandingkan performa Decision Tree, Random Forest, dan Logistic Regression</li>
+            <li>Mengidentifikasi fitur fotometrik yang paling berpengaruh terhadap klasifikasi</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Dataset</h3>
+          <ul class="styled-list">
+            <li>Sumber: Sloan Digital Sky Survey (SDSS DR17)</li>
+            <li>100.000 observasi objek langit</li>
+            <li>Fitur: koordinat langit, filter fotometrik (u, g, r, i, z), redshift, dan metadata</li>
+            <li>Split: 80% training, 20% testing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🔬 Fitur-Fitur Utama</h2>
+      <div class="feature-grid" id="feature-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PAGE: DATASET ══════════════ -->
+  <section class="page" id="page-dataset">
+    <div class="page-header">
+      <h1>📊 Eksplorasi Dataset</h1>
+      <p class="subtitle">Distribusi dan statistik data SDSS Stellar Classification</p>
+    </div>
+
+    <div class="card">
+      <h2>Distribusi Kelas Target</h2>
+      <div class="chart-loader" id="dist-loader">
+        <div class="spinner"></div><span>Memuat grafik...</span>
+      </div>
+      <img id="dist-chart" class="chart-img hidden" alt="Distribution Chart"/>
+      <div class="class-stats-row" id="class-stats-row"></div>
+    </div>
+
+    <div class="card">
+      <h2>Distribusi Fitur per Kelas</h2>
+      <div class="chart-loader" id="feat-loader">
+        <div class="spinner"></div><span>Memuat grafik...</span>
+      </div>
+      <img id="feat-chart" class="chart-img hidden" alt="Feature Distribution"/>
+    </div>
+  </section>
+
+  <!-- ══════════════ PAGE: PREDICT ══════════════ -->
+  <section class="page" id="page-predict">
+    <div class="page-header">
+      <h1>🔭 Prediksi Objek Langit</h1>
+      <p class="subtitle">Masukkan data pengamatan untuk mengklasifikasikan objek</p>
+    </div>
+
+    <div class="predict-layout">
+      <div class="card predict-form-card">
+        <div class="form-header">
+          <h2>Input Data Pengamatan</h2>
+          <div class="model-selector">
+            <label>Model:</label>
+            <select id="pred-model">
+              <option value="Random Forest">Random Forest</option>
+              <option value="Decision Tree">Decision Tree</option>
+              <option value="Logistic Regression">Logistic Regression</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sample-btns">
+          <span>Contoh Data:</span>
+          <button class="sample-btn" data-class="GALAXY">🌀 Galaxy</button>
+          <button class="sample-btn" data-class="QSO">⚡ QSO</button>
+          <button class="sample-btn" data-class="STAR">⭐ Star</button>
+        </div>
+
+        <div class="form-grid" id="input-form"></div>
+
+        <button class="btn-predict" id="btn-predict">
+          <span class="btn-icon">🔭</span> Prediksi Sekarang
+        </button>
+      </div>
+
+      <div class="card predict-result-card">
+        <h2>Hasil Prediksi</h2>
+        <div id="predict-result-area">
+          <div class="empty-state">
+            <div style="font-size:48px">🌌</div>
+            <p>Masukkan data dan klik "Prediksi Sekarang"<br/>untuk melihat hasil klasifikasi</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PAGE: COMPARE ══════════════ -->
+  <section class="page" id="page-compare">
+    <div class="page-header">
+      <h1>⚖️ Perbandingan 3 Model ML</h1>
+      <p class="subtitle">Decision Tree vs Random Forest vs Logistic Regression</p>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <p>Klik tombol di bawah untuk melatih dan membandingkan semua model.</p>
+      <button class="btn-predict" id="btn-train-all" style="margin: 16px auto;">
+        <span class="btn-icon">⚙️</span> Latih & Bandingkan Semua Model
+      </button>
+      <div class="chart-loader hidden" id="train-loader">
+        <div class="spinner"></div><span>Melatih model, harap tunggu...</span>
+      </div>
+    </div>
+
+    <div id="compare-results" class="hidden">
+      <div class="card">
+        <h2>📊 Perbandingan Akurasi</h2>
+        <img id="acc-chart" class="chart-img" alt="Accuracy Comparison"/>
+        <div class="accuracy-table-wrap" id="accuracy-table-wrap"></div>
+      </div>
+      <div class="card">
+        <h2>🔲 Confusion Matrix</h2>
+        <img id="cm-chart" class="chart-img" alt="Confusion Matrices"/>
+      </div>
+      <div class="card">
+        <h2>🏆 Classification Report</h2>
+        <div id="clf-report-tabs" class="tabs"></div>
+        <div id="clf-report-content"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PAGE: PERFORMANCE ══════════════ -->
+  <section class="page" id="page-performance">
+    <div class="page-header">
+      <h1>📈 Performa & Validasi Lanjutan</h1>
+      <p class="subtitle">Feature Importance, ROC-AUC, dan Cross-Validation</p>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <p>Analisis lanjutan membutuhkan model yang sudah dilatih. Pastikan Anda sudah menjalankan "Bandingkan Model" atau klik di bawah.</p>
+      <button class="btn-predict" id="btn-load-perf" style="margin:16px auto;">
+        <span class="btn-icon">📈</span> Muat Analisis Performa
+      </button>
+      <div class="chart-loader hidden" id="perf-loader">
+        <div class="spinner"></div><span>Menghitung performa...</span>
+      </div>
+    </div>
+
+    <div id="perf-results" class="hidden">
+      <div class="card">
+        <h2>⭐ Feature Importance (Random Forest)</h2>
+        <p class="card-desc">Fitur yang paling berpengaruh dalam pengambilan keputusan model Random Forest.</p>
+        <img id="fi-chart" class="chart-img" alt="Feature Importance"/>
+      </div>
+      <div class="card">
+        <h2>📉 Multiclass ROC-AUC Curve</h2>
+        <p class="card-desc">Kurva ROC menunjukkan kemampuan model membedakan setiap kelas. AUC mendekati 1.0 berarti performa sangat baik.</p>
+        <img id="roc-chart" class="chart-img" alt="ROC AUC"/>
+      </div>
+      <div class="card">
+        <h2>🔄 K-Fold Cross Validation (k=5)</h2>
+        <p class="card-desc">Menguji robustness model dengan 5 fold data yang berbeda.</p>
+        <div class="chart-loader hidden" id="cv-loader">
+          <div class="spinner"></div><span>Menghitung cross validation...</span>
+        </div>
+        <img id="cv-chart" class="chart-img" alt="Cross Validation"/>
+        <div id="cv-table"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
