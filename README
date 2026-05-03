@@ -1,0 +1,176 @@
+# 🌌 SDSS Sky Object Classification
+
+## 📌 Overview & Objective
+
+This project focuses on classifying celestial objects using data from the **Sloan Digital Sky Survey (SDSS)**. The dataset contains astronomical observations with features derived from photometric measurements.
+
+🎯 **Objective:**
+Build a machine learning system capable of accurately classifying sky objects into:
+
+* 🌠 **Galaxy**
+* ⭐ **Star**
+* 🌀 **Quasar**
+
+This task is fundamental in astronomy for understanding the structure and evolution of the universe, while also serving as a strong applied ML classification problem.
+
+---
+
+## 🧰 Tech Stack
+
+The system is built using a clean and modular stack:
+
+* 🐍 **Python** — Core programming language
+* 🤖 **scikit-learn** — Model training (Decision Tree, Logistic Regression, Random Forest)
+* 🌐 **Flask** — Backend API for serving ML predictions
+* 🎨 **Streamlit** — Interactive frontend UI for user input and visualization
+
+---
+
+## 🏗️ System Architecture
+
+The project follows a **decoupled architecture**:
+
+```
+[Jupyter Notebook] → [Model Training & Evaluation]
+                         ↓
+                 [Saved Models (.pkl)]
+                         ↓
+                 [Flask API Backend]
+                         ↓
+                [Streamlit Frontend UI]
+```
+
+### Key Design Choices:
+
+* 📦 ML logic is **extracted from notebooks** into reusable backend code
+* 🔌 Flask acts as a **prediction service (API layer)**
+* 🖥️ Streamlit provides a **user-friendly interface** for interaction
+* 📊 Metrics are stored separately (`metrics.json`) for transparency
+
+This separation ensures better scalability, maintainability, and real-world deployment alignment.
+
+---
+
+## 🚀 How to Run
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone <your-repo-url>
+cd <your-project-folder>
+```
+
+---
+
+### 2️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 3️⃣ Run Backend (Flask API)
+
+Open **Terminal 1**:
+
+```bash
+cd backend
+python app.py
+```
+
+📍 The API will run at:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+### 4️⃣ Run Frontend (Streamlit)
+
+Open **Terminal 2**:
+
+```bash
+cd frontend
+streamlit run main.py
+```
+
+📍 The UI will open automatically in your browser:
+
+```
+http://localhost:8501
+```
+
+---
+
+## 📂 Project Structure
+
+```
+backend/
+  ├── models/
+  │     ├── model_dt.pkl
+  │     ├── model_logreg.pkl
+  │     ├── model_rf.pkl
+  │     ├── scaler_sdss.pkl
+  │     └── metrics.json
+  └── app.py
+
+data/
+  └── star_classification.csv
+
+frontend/
+  ├── main.py
+  └── .streamlit/config.toml
+
+notebooks/
+  └── classification_comparison.ipynb
+
+static/
+  ├── images/
+  └── style.css
+
+templates/
+  └── index.html
+
+calc_metrics.py
+README.md
+requirements.txt
+```
+
+---
+
+## ⚡ Key Features
+
+* 🔍 Multi-model comparison (DT, Logistic Regression, Random Forest)
+* 📊 Stored evaluation metrics for analysis
+* ⚙️ Preprocessing with saved scaler
+* 🌐 API-based prediction workflow
+* 🖥️ Clean interactive frontend
+
+---
+
+## 📈 Future Improvements
+
+* 🚀 Add model ensemble (stacking/blending)
+* 📡 Deploy to cloud (e.g., AWS / GCP / Railway)
+* 📱 Extend to mobile-friendly interface
+* 🧠 Integrate deep learning for improved performance
+
+---
+
+## 🧪 Notes
+
+* Ensure both **Flask and Streamlit run simultaneously**
+* API must be active before interacting with the frontend
+* Model files (`.pkl`) must remain in the correct directory
+
+---
+
+## 👨‍💻 Author
+
+Developed as part of a machine learning system design and deployment practice project.
+
+---
+
+🌌 *Turning astronomical data into intelligent predictions.*
