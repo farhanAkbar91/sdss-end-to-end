@@ -18,18 +18,14 @@
     <li class="menu-item active" data-page="overview">
       <span class="menu-icon">🌌</span> Overview
     </li>
-    <li class="menu-item" data-page="dataset">
-      <span class="menu-icon">📊</span> Dataset
-    </li>
+
     <li class="menu-item" data-page="predict">
       <span class="menu-icon">🔭</span> Prediksi Objek
     </li>
     <li class="menu-item" data-page="compare">
       <span class="menu-icon">⚖️</span> Perbandingan Model
     </li>
-    <li class="menu-item" data-page="performance">
-      <span class="menu-icon">📈</span> Performa & Validasi
-    </li>
+
   </ul>
   <div style="padding: 0 20px;">
     <a href="http://localhost:8501" style="display: block; text-align: center; background: #4f86c6; color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: bold; margin-bottom: 20px;">
@@ -128,32 +124,21 @@
       <h2>🔬 Fitur-Fitur Utama</h2>
       <div class="feature-grid" id="feature-grid"></div>
     </div>
+
+    <!-- Astronomy Glossary -->
+    <div class="card">
+      <h2>📖 Astronomy Glossary</h2>
+      <ul class="styled-list">
+        <li><strong>Redshift:</strong> Measure of how much the light from an object is shifted toward the red end of the spectrum, indicating its velocity away from Earth (expansion of the universe). High redshift often implies distant objects like Quasars.</li>
+        <li><strong>ugriz Filters:</strong> The five filters used by SDSS to measure the brightness of objects in different wavelengths: u (Ultraviolet), g (Green), r (Red), i (Near Infrared), z (Infrared).</li>
+        <li><strong>MJD (Modified Julian Date):</strong> The date the observation was made, counted in days from a specific starting point.</li>
+        <li><strong>Plate ID:</strong> ID of the aluminum plate used to hold optical fibers for spectroscopy.</li>
+        <li><strong>Alpha & Delta:</strong> Right Ascension and Declination. The celestial equivalent of longitude and latitude.</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- ══════════════ PAGE: DATASET ══════════════ -->
-  <section class="page" id="page-dataset">
-    <div class="page-header">
-      <h1>📊 Eksplorasi Dataset</h1>
-      <p class="subtitle">Distribusi dan statistik data SDSS Stellar Classification</p>
-    </div>
 
-    <div class="card">
-      <h2>Distribusi Kelas Target</h2>
-      <div class="chart-loader" id="dist-loader">
-        <div class="spinner"></div><span>Memuat grafik...</span>
-      </div>
-      <img id="dist-chart" class="chart-img hidden" alt="Distribution Chart"/>
-      <div class="class-stats-row" id="class-stats-row"></div>
-    </div>
-
-    <div class="card">
-      <h2>Distribusi Fitur per Kelas</h2>
-      <div class="chart-loader" id="feat-loader">
-        <div class="spinner"></div><span>Memuat grafik...</span>
-      </div>
-      <img id="feat-chart" class="chart-img hidden" alt="Feature Distribution"/>
-    </div>
-  </section>
 
   <!-- ══════════════ PAGE: PREDICT ══════════════ -->
   <section class="page" id="page-predict">
@@ -221,61 +206,13 @@
 
     <div id="compare-results" class="hidden">
       <div class="card">
-        <h2>📊 Perbandingan Akurasi</h2>
-        <img id="acc-chart" class="chart-img" alt="Accuracy Comparison"/>
+        <h2>📊 Perbandingan Metrik</h2>
         <div class="accuracy-table-wrap" id="accuracy-table-wrap"></div>
       </div>
-      <div class="card">
-        <h2>🔲 Confusion Matrix</h2>
-        <img id="cm-chart" class="chart-img" alt="Confusion Matrices"/>
-      </div>
-      <div class="card">
-        <h2>🏆 Classification Report</h2>
-        <div id="clf-report-tabs" class="tabs"></div>
-        <div id="clf-report-content"></div>
-      </div>
     </div>
   </section>
 
-  <!-- ══════════════ PAGE: PERFORMANCE ══════════════ -->
-  <section class="page" id="page-performance">
-    <div class="page-header">
-      <h1>📈 Performa & Validasi Lanjutan</h1>
-      <p class="subtitle">Feature Importance, ROC-AUC, dan Cross-Validation</p>
-    </div>
 
-    <div class="card" style="text-align:center">
-      <p>Analisis lanjutan membutuhkan model yang sudah dilatih. Pastikan Anda sudah menjalankan "Bandingkan Model" atau klik di bawah.</p>
-      <button class="btn-predict" id="btn-load-perf" style="margin:16px auto;">
-        <span class="btn-icon">📈</span> Muat Analisis Performa
-      </button>
-      <div class="chart-loader hidden" id="perf-loader">
-        <div class="spinner"></div><span>Menghitung performa...</span>
-      </div>
-    </div>
-
-    <div id="perf-results" class="hidden">
-      <div class="card">
-        <h2>⭐ Feature Importance (Random Forest)</h2>
-        <p class="card-desc">Fitur yang paling berpengaruh dalam pengambilan keputusan model Random Forest.</p>
-        <img id="fi-chart" class="chart-img" alt="Feature Importance"/>
-      </div>
-      <div class="card">
-        <h2>📉 Multiclass ROC-AUC Curve</h2>
-        <p class="card-desc">Kurva ROC menunjukkan kemampuan model membedakan setiap kelas. AUC mendekati 1.0 berarti performa sangat baik.</p>
-        <img id="roc-chart" class="chart-img" alt="ROC AUC"/>
-      </div>
-      <div class="card">
-        <h2>🔄 K-Fold Cross Validation (k=5)</h2>
-        <p class="card-desc">Menguji robustness model dengan 5 fold data yang berbeda.</p>
-        <div class="chart-loader hidden" id="cv-loader">
-          <div class="spinner"></div><span>Menghitung cross validation...</span>
-        </div>
-        <img id="cv-chart" class="chart-img" alt="Cross Validation"/>
-        <div id="cv-table"></div>
-      </div>
-    </div>
-  </section>
 
 </main>
 

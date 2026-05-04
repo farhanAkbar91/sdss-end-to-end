@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCompare = document.getElementById("btn-train-all");
   if (btnCompare) btnCompare.addEventListener("click", compareModels);
   
-  const btnLoadPerf = document.getElementById("btn-load-perf");
-  if (btnLoadPerf) btnLoadPerf.addEventListener("click", loadPerformance);
+
   
   document.querySelectorAll(".sample-btn").forEach(btn => {
     btn.addEventListener("click", (e) => loadSample(e.target.dataset.class));
@@ -225,37 +224,3 @@ function renderCompareResult(results) {
   wrap.innerHTML = tableHtml;
 }
 
-function loadPerformance() {
-  const btn = document.getElementById("btn-load-perf");
-  const loader = document.getElementById("perf-loader");
-  const resultsArea = document.getElementById("perf-results");
-  
-  btn.style.display = "none";
-  loader.classList.remove("hidden");
-  
-  // Mock loading for UI feedback
-  setTimeout(() => {
-    loader.classList.add("hidden");
-    resultsArea.classList.remove("hidden");
-    
-    // As backend doesn't provide chart images, we inject some informational text instead
-    document.querySelectorAll('#perf-results .chart-img').forEach(img => {
-      img.style.display = "none";
-    });
-    
-    const fiCard = document.getElementById("fi-chart")?.parentElement;
-    if (fiCard && !fiCard.querySelector('.info-msg')) {
-        fiCard.innerHTML += `<p class="info-msg" style="color:var(--text-muted); font-style:italic; padding: 20px; text-align:center; background:var(--bg-card2); border-radius:8px;">Visualisasi grafis saat ini tidak dikembalikan oleh API backend.</p>`;
-    }
-    
-    const rocCard = document.getElementById("roc-chart")?.parentElement;
-    if (rocCard && !rocCard.querySelector('.info-msg')) {
-        rocCard.innerHTML += `<p class="info-msg" style="color:var(--text-muted); font-style:italic; padding: 20px; text-align:center; background:var(--bg-card2); border-radius:8px;">Visualisasi grafis saat ini tidak dikembalikan oleh API backend.</p>`;
-    }
-
-    const cvCard = document.getElementById("cv-chart")?.parentElement;
-    if (cvCard && !cvCard.querySelector('.info-msg')) {
-        cvCard.innerHTML += `<p class="info-msg" style="color:var(--text-muted); font-style:italic; padding: 20px; text-align:center; background:var(--bg-card2); border-radius:8px;">Visualisasi grafis saat ini tidak dikembalikan oleh API backend.</p>`;
-    }
-  }, 800);
-}
