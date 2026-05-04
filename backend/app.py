@@ -2,9 +2,15 @@ import os
 import json
 import joblib
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='../static',
+            template_folder='../templates')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 # Constants
 FEATURE_COLS = ['alpha', 'delta', 'u', 'g', 'r', 'i', 'z', 'cam_col', 'redshift', 'plate', 'MJD']

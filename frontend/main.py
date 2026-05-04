@@ -38,6 +38,9 @@ st.markdown("<h1 class='main-header'>🌌 SDSS Stellar Classification Dashboard<
 st.markdown("Classify celestial objects (Stars, Galaxies, Quasars) using Machine Learning based on SDSS data.")
 
 # Sidebar for Input
+st.sidebar.markdown("### 🌐 Navigation")
+st.sidebar.markdown("[👉 Beralih ke Vanilla HTML Frontend](http://localhost:5000)")
+st.sidebar.markdown("---")
 st.sidebar.header("Telescope Observations (Features)")
 
 with st.sidebar.expander("Coordinates & Observation Details", expanded=True):
